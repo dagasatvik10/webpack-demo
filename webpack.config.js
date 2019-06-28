@@ -1,21 +1,32 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  entry: {
-    app: "./src/index.js",
-    print: "./src/print.js"
-  },
+  entry: "./src/index.js",
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "Output Management"
-    })
+    }),
+    new webpack.HashedModuleIdsPlugin()
   ],
   output: {
-    filename: "[name].bundle.js",
+    filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist")
   },
-  mode: "production"
+  mode: "production",
+  optimization: {
+    runtimeChunk: "single",
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all"
+        }
+      }
+    }
+  }
 };
