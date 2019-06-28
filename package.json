@@ -6,13 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "http-server ."
+    "start": "http-server dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^3.0.0",
+    "file-loader": "^4.0.0",
     "http-server": "^0.11.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.35.0",
